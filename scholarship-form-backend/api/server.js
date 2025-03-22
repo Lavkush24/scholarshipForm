@@ -11,6 +11,12 @@ const path = require('path');
 const app = express();
 const port = process.env.port || 5000;
 
+// app.use(cors({
+//     origin: 'https://scholarshipform-kyqs.vercel.app', // Allow only your frontend
+//     methods: 'GET,POST,PUT,DELETE',
+//     allowedHeaders: 'Content-Type, Authorization'
+//   }));
+
 // Middleware
 const backend = process.env.BACKEND;
 app.use(bodyParser.json());
