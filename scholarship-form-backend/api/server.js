@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV != "production") {
+    require("dotenv").config();
+}
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -5,18 +9,18 @@ const { MongoClient } = require('mongodb');
 const path = require('path');
 
 const app = express();
-const port = 5000;
+const port = process.env.port || 5000;
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors({ origin: "https://your-frontend.vercel.app" }));
+app.use(cors({ origin: "https://scholarshipform-wvnk.vercel.app" }));
 
 // Serve static files from the "public" folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 // MongoDB Connection URI (Replace with your MongoDB URI)
-const uri = 'mongodb://localhost:27017'; // Replace with your MongoDB URI
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const url = process.env.ATLASDB_URL; // Replace with your MongoDB URI
+const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Connect to MongoDB
 async function connectToMongoDB() {
@@ -64,9 +68,3 @@ app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
 
-// Graceful shutdown
-process.on('SIGINT', async () => {
-    await client.close();
-    console.log('MongoDB connection closed.');
-    process.exit(0);
-});
