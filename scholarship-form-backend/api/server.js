@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.port || 5000;
 
 app.use(cors({
-    origin: 'https://scholarshipform-kyqs.vercel.app', // Allow only your frontend
+    origin: 'https://scholarshipform-jd3k.vercel.app', // Allow only your frontend
     methods: 'GET,POST,PUT,DELETE',
     allowedHeaders: 'Content-Type, Authorization'
   }));
