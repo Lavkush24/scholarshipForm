@@ -12,8 +12,9 @@ const app = express();
 const port = process.env.port || 5000;
 
 // Middleware
+const backend = process.env.BACKEND;
 app.use(bodyParser.json());
-app.use(cors({ origin: "https://scholarshipform-wvnk.vercel.app" }));
+app.use(cors({ origin: backend }));
 
 // Serve static files from the "public" folder
 app.use(express.static(path.join(__dirname, 'public')));
